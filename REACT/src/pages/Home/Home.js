@@ -1,23 +1,20 @@
-import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../style.css";
 
 function Home() {
-  const url = "http://localhost:8080/dados";
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-
+  const [search, setSearch] = useState("");
   useEffect(() => {
-    axios.get(url).then((json) => setData(json.data));
+    axios.get("http://localhost:8080/dados").then((json) => setData(json.data));
   }, []);
-
   const handleClickDeleteUser = (id) => {
     axios
       .post("http://localhost:8080/deleteUser", {
@@ -34,9 +31,18 @@ function Home() {
   const handleClickUpdateUser = (id) => {
     navigate(`/AtualizarUsuario/${id}`);
   };
+  const checkSearch = useMemo(() => {
+    const lowerBusca = search.toLowerCase();
+    if (search === "") {
+      return data;
+    }
+    return data.filter((user) =>
+      user.nome.toString().toLowerCase().includes(lowerBusca)
+    );
+  });
 
   const renderTable = () => {
-    return data.map((user) => {
+    return checkSearch.map((user) => {
       return (
         <tr key={user.id}>
           <td>{user.id}</td>
@@ -72,6 +78,19 @@ function Home() {
       <header>
         <h1>User List!</h1>
       </header>
+      <div className="container__search">
+        <span>
+          <h2 className="search">Search Users</h2>
+        </span>
+        <input
+          type="text"
+          value={search}
+          placeholder="enter a name..."
+          className="input-search"
+          onChange={(event) => setSearch(event.target.value)}
+          autoFocus
+        />
+      </div>
       <Container className="container_home">
         <main>
           <Table striped bordered hover variant="dark" className="table__home">
@@ -98,7 +117,7 @@ function Home() {
           </Row>
           <Row align="center">
             <div>
-              <h6>&copy;Desenvolvido Por Caio</h6>
+              <h5>&copy;Desenvolvido Por Caio</h5>
             </div>
           </Row>
         </footer>

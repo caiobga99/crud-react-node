@@ -9,8 +9,14 @@
 
 .container_home {
   height: 100vh;
+  /* background: linear-gradient(to right, #8f8e8c, #4f5d5d); */
+  background: radial-gradient(
+    circle at 18.7% 37.8%,
+    rgb(232, 231, 231) 0%,
+    rgb(185, 193, 197) 90%
+  );
+
   width: 100%;
-  background-image: linear-gradient(to right, #8f8e8c, #4f5d5d);
 }
 
 header {
@@ -43,12 +49,30 @@ main {
 .buttons {
   font-family: "Anek Gujarati", sans-serif;
 }
-
+.container__search {
+  font-family: "Anek Gujarati", sans-serif;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: fit-content;
+  width: 65%;
+  flex-direction: column;
+  color: chartreuse;
+  text-shadow: -2px 1px 1px #000, 2px 1px 1px #000, 1px -2px 1px #000,
+    1px 2px 1px #000;
+}
+.search {
+  font-weight: bold;
+}
+.input-search {
+  border: 1px solid #000;
+  padding: 0.5%;
+}
 footer {
   height: 5%;
   width: 100%;
   font-weight: bold;
-  color: #fff;
+  color: #111;
   font-family: "Anek Gujarati", sans-serif;
 }
 
