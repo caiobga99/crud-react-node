@@ -1,27 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import { isEmail } from "validator";
-import "./Form-Modal.css";
+import "./Form.css";
 import axios from "axios";
 
 function ModalForm(props) {
   const [lgShow, setLgShow] = useState(false);
+  const [dados, setDados] = useState("");
+  const [datas, setDatas] = useState("");
+  const [url, setUrl] = useState("http://localhost:8080/addUser");
+  const [isCheck, setIsCheck] = useState(true);
+  useEffect(() => {
+    if (props.dados) {
+      setDados(props.dados);
+      setIsCheck(false);
+      setUrl("http://localhost:8080/updateUser");
+      let defaultValues = {};
+      defaultValues.nome = dados.nome;
+      defaultValues.email = dados.email;
+      defaultValues.senha = dados.senha;
+      reset({ ...defaultValues });
+    }
+  }, [props.dados]);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     const dados = {
-      nome: data.name,
+      nome: data.nome,
       email: data.email,
-      senha: data.password,
+      senha: data.senha,
     };
+    if (!isCheck) {
+      Object.assign(dados, { id: props.dados.id });
+    }
     axios
-      .post("http://localhost:8080/addUser", {
+      .post(url, {
         data: dados,
       })
       .then((res) => {
@@ -34,7 +54,7 @@ function ModalForm(props) {
   };
   return (
     <>
-      <Button onClick={() => setLgShow(true)}>Add User</Button>
+      <Button onClick={() => setLgShow(true)}>{props.children}</Button>
       <Modal
         fullscreen="xxl-down"
         size="xl"
@@ -44,7 +64,7 @@ function ModalForm(props) {
       >
         <Modal.Header closeButton>
           <header className="header__modal">
-            <h1>Register User</h1>
+            <h1>{props.header}</h1>
           </header>
         </Modal.Header>
         <div className="app-container">
@@ -54,7 +74,7 @@ function ModalForm(props) {
               className={errors?.name && "input-error"}
               type="text"
               placeholder="Your name"
-              {...register("name", { required: true })}
+              {...register("nome", { required: true })}
             />
             {errors?.name?.type === "required" && (
               <p className="error-message">Name is required.</p>
@@ -87,7 +107,7 @@ function ModalForm(props) {
               className={errors?.password && "input-error"}
               type="password"
               placeholder="Password"
-              {...register("password", { required: true, minLength: 7 })}
+              {...register("senha", { required: true, minLength: 7 })}
             />
 
             {errors?.password?.type === "required" && (
@@ -121,7 +141,9 @@ function ModalForm(props) {
           </div>
           <div className="form-group">
             <div>
-              <button onClick={() => handleSubmit(onSubmit)()}>Register</button>
+              <button onClick={() => handleSubmit(onSubmit)()}>
+                {props.header}
+              </button>
             </div>
           </div>
         </div>

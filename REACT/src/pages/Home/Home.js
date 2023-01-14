@@ -1,4 +1,3 @@
-import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useMemo } from "react";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
@@ -10,7 +9,6 @@ import axios from "axios";
 import "../style.css";
 
 function Home() {
-  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   useEffect(() => {
@@ -28,9 +26,6 @@ function Home() {
       .catch((error) => {
         console.log(error);
       });
-  };
-  const handleClickUpdateUser = (id) => {
-    navigate(`/AtualizarUsuario/${id}`);
   };
   const checkSearch = useMemo(() => {
     const lowerBusca = search.toLowerCase();
@@ -51,14 +46,9 @@ function Home() {
           <td>{user.email}</td>
           <td>{user.senha}</td>
           <td>
-            <Button
-              className="buttons"
-              type="button"
-              variant="warning"
-              onClick={() => handleClickUpdateUser(user.id)}
-            >
+            <ModalForm dados={user} header="Update">
               Atualizar
-            </Button>
+            </ModalForm>
           </td>
           <td>
             <Button
@@ -111,7 +101,7 @@ function Home() {
         <footer>
           <Row align="right">
             <div>
-              <ModalForm />
+              <ModalForm header="Register">Add User</ModalForm>
             </div>
           </Row>
           <Row align="center">
