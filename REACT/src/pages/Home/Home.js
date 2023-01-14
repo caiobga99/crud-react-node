@@ -5,6 +5,7 @@ import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ModalForm from "../../components/ModalForm";
 import axios from "axios";
 import "../style.css";
 
@@ -110,9 +111,7 @@ function Home() {
         <footer>
           <Row align="right">
             <div>
-              <Link to="CadastrarUsuario">
-                <Button variant="primary">Add User!</Button>
-              </Link>
+              <ModalForm />
             </div>
           </Row>
           <Row align="center">
