@@ -3,12 +3,11 @@ import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import "bootstrap/dist/css/bootstrap.min.css";
 import ModalForm from "../../components/ModalForm";
 import axios from "axios";
 import "../style.css";
 
-function Home() {
+const Home = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   useEffect(() => {
@@ -35,7 +34,7 @@ function Home() {
     return data.filter((user) =>
       user.nome.toString().toLowerCase().includes(lowerBusca)
     );
-  });
+  }, [search, data]);
 
   const renderTable = () => {
     return checkSearch.map((user) => {
@@ -66,23 +65,23 @@ function Home() {
 
   return (
     <div className="container_home">
-      <header>
+      <header className="header">
         <h1>User List!</h1>
       </header>
-      <div className="container__search">
-        <span>
-          <h2 className="search">Search Users</h2>
-        </span>
-        <input
-          type="text"
-          value={search}
-          placeholder="enter a name..."
-          className="input-search"
-          onChange={(event) => setSearch(event.target.value)}
-          autoFocus
-        />
-      </div>
-      <Container className="container_home">
+      <Container>
+        <div className="container__search">
+          <span>
+            <h2 className="search">Search Users</h2>
+          </span>
+          <input
+            type="text"
+            value={search}
+            placeholder="enter a name..."
+            className="input-search"
+            onChange={(event) => setSearch(event.target.value)}
+            autoFocus
+          />
+        </div>
         <main>
           <Table striped bordered hover variant="dark" className="table__home">
             <thead>
@@ -113,6 +112,6 @@ function Home() {
       </Container>
     </div>
   );
-}
+};
 
 export default Home;

@@ -6,10 +6,9 @@ import { isEmail } from "validator";
 import "./Form.css";
 import axios from "axios";
 
-function ModalForm(props) {
+const ModalForm = (props) => {
   const [lgShow, setLgShow] = useState(false);
   const [dados, setDados] = useState("");
-  const [datas, setDatas] = useState("");
   const [url, setUrl] = useState("http://localhost:8080/addUser");
   const [isCheck, setIsCheck] = useState(true);
   useEffect(() => {
@@ -18,9 +17,9 @@ function ModalForm(props) {
       setIsCheck(false);
       setUrl("http://localhost:8080/updateUser");
       let defaultValues = {};
-      defaultValues.nome = dados.nome;
+      defaultValues.name = dados.nome;
       defaultValues.email = dados.email;
-      defaultValues.senha = dados.senha;
+      defaultValues.password = dados.senha;
       reset({ ...defaultValues });
     }
   }, [props.dados]);
@@ -33,9 +32,9 @@ function ModalForm(props) {
 
   const onSubmit = (data) => {
     const dados = {
-      nome: data.nome,
+      nome: data.name,
       email: data.email,
-      senha: data.senha,
+      senha: data.password,
     };
     if (!isCheck) {
       Object.assign(dados, { id: props.dados.id });
@@ -54,7 +53,9 @@ function ModalForm(props) {
   };
   return (
     <>
-      <Button onClick={() => setLgShow(true)}>{props.children}</Button>
+      <Button className="buttons" onClick={() => setLgShow(true)}>
+        {props.children}
+      </Button>
       <Modal
         fullscreen="xxl-down"
         size="xl"
@@ -74,7 +75,7 @@ function ModalForm(props) {
               className={errors?.name && "input-error"}
               type="text"
               placeholder="Your name"
-              {...register("nome", { required: true })}
+              {...register("name", { required: true })}
             />
             {errors?.name?.type === "required" && (
               <p className="error-message">Name is required.</p>
@@ -107,7 +108,7 @@ function ModalForm(props) {
               className={errors?.password && "input-error"}
               type="password"
               placeholder="Password"
-              {...register("senha", { required: true, minLength: 7 })}
+              {...register("password", { required: true, minLength: 7 })}
             />
 
             {errors?.password?.type === "required" && (
@@ -150,5 +151,5 @@ function ModalForm(props) {
       </Modal>
     </>
   );
-}
+};
 export default ModalForm;
