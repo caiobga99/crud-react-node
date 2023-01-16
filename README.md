@@ -8,9 +8,9 @@ primeiro crud feito com react e node.
 
 permite criar, excluir e atualizar operações (CRUD) com base no gerenciamento de usuários.
 
-#tecnologiasusadas
+#tecnologias usadas.
 
-linguagem de programação: javascript
+linguagem de programação: javascript.
 
 frameworks: React para fazer o front-end e consumir a API e Node para criar a API e permitir que os usuários gerenciem operações e armazenem dados em um banco de dados onde o mysql foi usado.
 
@@ -53,7 +53,7 @@ allows you to create, delete and update (CRUD) operations based on user manageme
 
 #technologies used
 
-programming language: javascript,
+programming language: javascript.
 
 frameworks: React to make the front-end and consume the api and Node to create the api and allow users to manage operations and store data in a database where mysql was used.
 
