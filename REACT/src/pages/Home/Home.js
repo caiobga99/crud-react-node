@@ -6,10 +6,12 @@ import Container from "react-bootstrap/Container";
 import ModalForm from "../../components/ModalForm";
 import axios from "axios";
 import "../style.css";
+import Alert from "react-bootstrap/Alert";
 
 const Home = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
+  const [show, setShow] = useState(false);
   useEffect(() => {
     axios.get("http://localhost:8080/dados").then((json) => setData(json.data));
   }, []);
@@ -20,7 +22,7 @@ const Home = () => {
       })
       .then((res) => {
         console.log(res);
-        window.location.reload();
+        window.location.reload(false);
       })
       .catch((error) => {
         console.log(error);
@@ -29,11 +31,14 @@ const Home = () => {
   const checkSearch = useMemo(() => {
     const lowerBusca = search.toLowerCase();
     if (search === "") {
+      setShow(false);
       return data;
     }
-    return data.filter((user) =>
+    const check = data.filter((user) =>
       user.nome.toString().toLowerCase().includes(lowerBusca)
     );
+    check.length === 0 ? setShow(true) : setShow(false);
+    return check;
   }, [search, data]);
 
   const renderTable = () => {
@@ -69,18 +74,25 @@ const Home = () => {
         <h1>User List!</h1>
       </header>
       <Container>
-        <div className="container__search">
-          <span>
-            <h2 className="search">Search Users</h2>
-          </span>
-          <input
-            type="text"
-            value={search}
-            placeholder="enter a name..."
-            className="input-search"
-            onChange={(event) => setSearch(event.target.value)}
-            autoFocus
-          />
+        <div className="alert__container">
+          <div className="container__search">
+            <span>
+              <h2 className="search">Search Users</h2>
+            </span>
+            <input
+              type="text"
+              value={search}
+              placeholder="enter a name..."
+              className="input-search"
+              onChange={(event) => setSearch(event.target.value)}
+              autoFocus
+            />
+          </div>
+          <div>
+            <Alert show={show} variant="warning">
+              User not found
+            </Alert>
+          </div>
         </div>
         <main>
           <Table striped bordered hover variant="dark" className="table__home">

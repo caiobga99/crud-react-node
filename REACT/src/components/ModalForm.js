@@ -5,12 +5,15 @@ import { useForm } from "react-hook-form";
 import { isEmail } from "validator";
 import "./Form.css";
 import axios from "axios";
+import Alert from "react-bootstrap/Alert";
 
 const ModalForm = (props) => {
   const [lgShow, setLgShow] = useState(false);
   const [dados, setDados] = useState("");
   const [url, setUrl] = useState("http://localhost:8080/addUser");
   const [isCheck, setIsCheck] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isDanger, setIsDanger] = useState(false);
   useEffect(() => {
     if (props.dados) {
       setDados(props.dados);
@@ -44,10 +47,18 @@ const ModalForm = (props) => {
         data: dados,
       })
       .then((res) => {
+        setIsSuccess(true);
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 2000);
         console.log(res);
-        window.location.reload();
+        window.location.reload(false);
       })
       .catch((error) => {
+        setIsDanger(true);
+        setTimeout(() => {
+          setIsDanger(false);
+        }, 2000);
         console.log(error);
       });
   };
@@ -69,6 +80,12 @@ const ModalForm = (props) => {
           </header>
         </Modal.Header>
         <div className="app-container">
+          <Alert variant="success" show={isSuccess}>
+            user updated successfully.
+          </Alert>
+          <Alert variant="danger" show={isDanger}>
+            could not update user.
+          </Alert>
           <div className="form-group">
             <label>Name</label>
             <input
