@@ -63,7 +63,7 @@ const Home = () => {
           <td>{user.senha}</td>
           <td>
             <ModalForm dados={user} header="Update">
-              Atualizar
+              Update
             </ModalForm>
           </td>
           <td>
@@ -72,7 +72,7 @@ const Home = () => {
               variant="danger"
               onClick={() => handleClickDeleteUser(user.id)}
             >
-              Deletar
+              Delete
             </Button>
           </td>
         </tr>
@@ -123,11 +123,11 @@ const Home = () => {
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Nome</th>
-                <th>Senha</th>
+                <th>Name</th>
+                <th>Password</th>
                 <th>Email</th>
-                <th>Atualizar</th>
-                <th>Deletar</th>
+                <th>Update</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>{renderTable()}</tbody>
@@ -141,7 +141,7 @@ const Home = () => {
           </Row>
           <Row align="center">
             <div>
-              <h5>&copy;Desenvolvido Por Caio</h5>
+              <h5>&copy;Created by: Caio</h5>
             </div>
           </Row>
         </footer>
