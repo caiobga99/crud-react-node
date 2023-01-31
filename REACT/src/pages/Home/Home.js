@@ -7,17 +7,17 @@ import ModalForm from "../../components/ModalForm";
 import axios from "axios";
 import "../style.css";
 import Alert from "react-bootstrap/Alert";
-
+import { api } from "../../lib/axios";
 const Home = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [show, setShow] = useState(false);
   useEffect(() => {
-    axios.get("http://localhost:8080/dados").then((json) => setData(json.data));
+    api.get("dados").then((json) => setData(json.data));
   }, []);
   const handleClickDeleteUser = (id) => {
-    axios
-      .post("http://localhost:8080/deleteUser", {
+    api
+      .post("deleteUser", {
         id: id,
       })
       .then((res) => {
