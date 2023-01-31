@@ -67,6 +67,14 @@ h2.search {
 .buttons {
   font-family: "Anek Gujarati", sans-serif;
 }
+.alertDeleteUser {
+  width: fit-content;
+}
+.container_alert {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 tr {
   text-align: center;
 }

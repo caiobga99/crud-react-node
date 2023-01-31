@@ -4,7 +4,6 @@ import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import ModalForm from "../../components/ModalForm";
-import axios from "axios";
 import "../style.css";
 import Alert from "react-bootstrap/Alert";
 import { api } from "../../lib/axios";
@@ -12,19 +11,32 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [show, setShow] = useState(false);
+  const [isSucess, setIsSuccess] = useState(false);
+  const [isDanger, setIsDanger] = useState(false);
+
   useEffect(() => {
     api.get("dados").then((json) => setData(json.data));
   }, []);
   const handleClickDeleteUser = (id) => {
+    setIsSuccess(false);
+    setIsDanger(false);
     api
       .post("deleteUser", {
         id: id,
       })
       .then((res) => {
+        setIsSuccess(true);
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 2000);
         console.log(res);
         window.location.reload(false);
       })
       .catch((error) => {
+        setIsDanger(true);
+        setTimeout(() => {
+          setIsDanger(false);
+        }, 2000);
         console.log(error);
       });
   };
@@ -94,6 +106,18 @@ const Home = () => {
             </Alert>
           </div>
         </div>
+        <Row align="center" className="container_alert">
+          <div className="alertDeleteUser">
+            <Alert variant="success" show={isSucess}>
+              Successfully deleted user!
+            </Alert>
+          </div>
+          <div className="alertDeleteUser">
+            <Alert variant="danger" show={isDanger}>
+              Unable to delete user!
+            </Alert>
+          </div>
+        </Row>
         <main>
           <Table striped bordered hover variant="dark" className="table__home">
             <thead>
