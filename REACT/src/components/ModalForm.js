@@ -4,13 +4,13 @@ import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import { isEmail } from "validator";
 import "./Form.css";
-import axios from "axios";
 import Alert from "react-bootstrap/Alert";
+import { api } from "../lib/axios";
 
 const ModalForm = (props) => {
   const [lgShow, setLgShow] = useState(false);
   const [dados, setDados] = useState("");
-  const [url, setUrl] = useState("http://localhost:8080/addUser");
+  const [url, setUrl] = useState("addUser");
   const [isCheck, setIsCheck] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isDanger, setIsDanger] = useState(false);
@@ -18,7 +18,7 @@ const ModalForm = (props) => {
     if (props.dados) {
       setDados(props.dados);
       setIsCheck(false);
-      setUrl("http://localhost:8080/updateUser");
+      setUrl("updateUser");
       let defaultValues = {};
       defaultValues.name = dados.nome;
       defaultValues.email = dados.email;
@@ -42,7 +42,7 @@ const ModalForm = (props) => {
     if (!isCheck) {
       Object.assign(dados, { id: props.dados.id });
     }
-    axios
+    api
       .post(url, {
         data: dados,
       })
@@ -80,11 +80,17 @@ const ModalForm = (props) => {
           </header>
         </Modal.Header>
         <div className="app-container">
-          <Alert variant="success" show={isSuccess}>
+          <Alert variant="success" show={isSuccess && url === "updateUser"}>
             user updated successfully.
           </Alert>
-          <Alert variant="danger" show={isDanger}>
+          <Alert variant="danger" show={isDanger && url === "updateUser"}>
             could not update user.
+          </Alert>
+          <Alert variant="success" show={isSuccess && url === "addUser"}>
+            successfully registered user.
+          </Alert>
+          <Alert variant="danger" show={isDanger && url === "addUser"}>
+            could not register user.
           </Alert>
           <div className="form-group">
             <label>Name</label>
