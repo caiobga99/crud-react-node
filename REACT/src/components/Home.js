@@ -3,10 +3,10 @@ import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import ModalForm from "../../components/ModalForm";
-import "../style.css";
+import ModalForm from "./ModalForm";
+import "./style.css";
 import Alert from "react-bootstrap/Alert";
-import { api } from "../../lib/axios";
+import { api } from "../lib/axios";
 const Home = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
