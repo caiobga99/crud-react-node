@@ -15,6 +15,18 @@ Use the package manager [npm](https://docs.npmjs.com/cli/v6/commands/npm-install
 ```bash
 npm run dev
 ```
+## database table needed by the application (MySQL)
+
+```MySQL
+CREATE DATABASE `registeruser`;
+USE `registeruser`;
+CREATE TABLE `users`(
+id INT  AUTO_INCREMENT PRIMARY KEY NOT NULL,
+nome VARCHAR(45) NOT NULL,
+senha VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL
+);
+```
 ## Features
 Allows read, create, delete, and update operations (CRUD) based on user management.
 ## Technologies Used
