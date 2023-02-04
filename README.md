@@ -44,3 +44,6 @@ Allows read, create, delete, and update operations (CRUD) based on user manageme
 - [Sequelize] - Sequelize is a modern TypeScript and Node.js ORM for Oracle, Postgres, MySQL, MariaDB, SQLite and SQL Server, and more. 
 - [Express] - Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
 - [MySQL] - MySQL is a database management system, which uses the SQL language as an interface.
+
+## Future Implementations
+allow the use of login for only the administrator can do the operations (CRUD) and the administrator decides if the user will be administrator or a common user.
