@@ -28,4 +28,4 @@ npm run dev
 - [JavaScript] - JavaScript is a structured, high-level scripting, dynamically typed, multiparadigm, interpreted programming language.
 - [Sequelize] - Sequelize is a modern TypeScript and Node.js ORM for Oracle, Postgres, MySQL, MariaDB, SQLite and SQL Server, and more. 
 - [Express] - Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
-- [MySQL] - SQLite is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine. 
+- [MySQL] - MySQL is a database management system, which uses the SQL language as an interface.
