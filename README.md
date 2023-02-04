@@ -15,10 +15,13 @@ Use the package manager [npm](https://docs.npmjs.com/cli/v6/commands/npm-install
 ```bash
 npm run dev
 ```
+## Features
+Allows read, create, delete, and update operations (CRUD) based on user management.
 ## Technologies Used
 
 ### Web - (ReactJS)
 - [React] - A JavaScript library for building user interfaces
+- [react-hook-form] - React Hook Form has support for native form validation, which lets you validate inputs with your own rules.
 - [JavaScript] - JavaScript is a structured, high-level scripting, dynamically typed, multiparadigm, interpreted programming language.
 - [CSS] - CSS, Cascading Style Sheets is a mechanism for adding styles to a web page.
 - [React-Bootstrap] - React-Bootstrap replaces the Bootstrap JavaScript. Each component has been built from scratch as a true React component, without unneeded dependencies like jQuery.
